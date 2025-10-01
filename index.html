@@ -3,695 +3,794 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lesson 1.4 Standards Alignment - AI vs. Traditional Software</title>
+    <title>Understanding AI - Standards Alignment</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f5;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
         }
+
         .header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 30px;
-            border-radius: 10px;
-            margin-bottom: 30px;
+            text-align: center;
         }
+
         .header h1 {
-            margin: 0 0 10px 0;
-            font-size: 2em;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
+
         .header p {
-            margin: 5px 0;
+            font-size: 1.1rem;
             opacity: 0.9;
         }
-        .section {
-            background: white;
+
+        .content {
+            padding: 30px;
+        }
+
+        .selector-section {
+            background: #e8f4f8;
             padding: 25px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border: 2px solid #667eea;
         }
-        .section h2 {
-            color: #667eea;
-            border-bottom: 3px solid #667eea;
-            padding-bottom: 10px;
-            margin-top: 0;
+
+        .selector-label {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
         }
-        .section h3 {
-            color: #764ba2;
-            margin-top: 20px;
-        }
-        .standard-box {
-            background: #f8f9fa;
-            border-left: 4px solid #667eea;
+
+        .state-selector {
+            width: 100%;
             padding: 15px;
-            margin: 15px 0;
+            font-size: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
+
+        .state-selector:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        }
+
+        .standards-display {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .standards-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .standards-header h2 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .standards-section {
+            margin-bottom: 25px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+
+        .standards-section h3 {
+            color: #667eea;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 5px;
+        }
+
+        .standard-item {
+            background: white;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
         .standard-code {
             font-weight: bold;
-            color: #764ba2;
-            font-size: 1.1em;
-            display: block;
-            margin-bottom: 8px;
+            color: #667eea;
+            font-size: 0.9rem;
         }
+
         .standard-text {
-            color: #333;
+            margin-top: 5px;
+            color: #555;
+        }
+
+        .course-info {
+            background: #e8f4f8;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #667eea;
+        }
+
+        .course-info h3 {
+            color: #667eea;
             margin-bottom: 10px;
         }
-        .alignment-explanation {
-            background: #e8eaf6;
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 10px;
-            font-style: italic;
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            background: #f8f9fa;
         }
-        .alignment-explanation strong {
-            font-style: normal;
-            color: #667eea;
-        }
-        .elps-box {
-            background: #fff3e0;
-            border-left: 4px solid #ff9800;
-            padding: 15px;
-            margin: 15px 0;
-        }
-        .category-header {
-            background: #e8f5e9;
-            padding: 10px 15px;
-            border-radius: 5px;
-            margin: 20px 0 10px 0;
-            font-weight: bold;
-            color: #2e7d32;
-        }
-        .lesson-connection {
-            background: #e3f2fd;
-            padding: 15px;
-            border-radius: 5px;
-            margin: 15px 0;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 15px 0;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-        }
-        th {
-            background-color: #667eea;
-            color: white;
-        }
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        .icon {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            margin-right: 5px;
-        }
-        .checkmark {
-            color: #4caf50;
-            font-weight: bold;
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .selector-section {
+                padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>Standards Alignment</h1>
-        <h2>Lesson 1.4: AI vs. Traditional Software</h2>
-        <p><strong>Course:</strong> Understanding AI: A Conceptual Approach</p>
-        <p><strong>Lesson Type:</strong> Discussion Day</p>
-        <p><strong>Grade Level:</strong> High School (9-12)</p>
-    </div>
+    <div class="container">
+        <div class="header">
+            <h1>Understanding AI: A Conceptual Approach</h1>
+            <p>Standards Alignment Tool for Teachers</p>
+        </div>
 
-    <div class="section">
-        <h2>Overview of Standards Coverage</h2>
-        <p>Lesson 1.4 addresses multiple standards across scientific inquiry, critical thinking, and communication. Students engage in analysis of AI capabilities and limitations through structured discussion, collaborative learning, and scientific reasoning about pattern-matching versus rule-following systems.</p>
-        
-        <div class="lesson-connection">
-            <h3>Primary Focus Standards</h3>
-            <p>This lesson particularly emphasizes:</p>
-            <ul>
-                <li><strong>Critical Thinking & Problem Solving:</strong> Distinguishing between AI and traditional software capabilities</li>
-                <li><strong>Communication:</strong> Articulating understanding through Think-Pair-Share and written reflection</li>
-                <li><strong>Scientific Reasoning:</strong> Developing testable hypotheses about AI boundaries</li>
-                <li><strong>Language Development:</strong> Using academic vocabulary (hallucination, verification, pattern-matching, domain knowledge)</li>
-            </ul>
+        <div class="content">
+            <div class="course-info">
+                <h3>Course Overview</h3>
+                <p><strong>Understanding AI: A Conceptual Approach</strong> is a 0.5 credit semester course designed for high school social studies students. Through hands-on experimentation with AI systems, field journal documentation, and critical analysis, students develop AI literacy skills essential for navigating an AI-shaped world. Students investigate how AI works, explore its societal impact, examine bias and fairness in algorithmic systems, and develop effective human-AI collaboration skills—all without writing code or solving complex equations.</p>
+            </div>
+
+            <div class="selector-section">
+                <div class="selector-label">Select your state or standards framework:</div>
+                <select id="stateSelector" class="state-selector">
+                    <option value="">Choose your state...</option>
+                    <option value="c3">C3 Framework (National Social Studies)</option>
+                    <option value="california">California</option>
+                    <option value="texas">Texas</option>
+                    <option value="florida">Florida</option>
+                    <option value="new_york">New York</option>
+                    <option value="pennsylvania">Pennsylvania</option>
+                    <option value="illinois">Illinois</option>
+                    <option value="ohio">Ohio</option>
+                    <option value="georgia">Georgia</option>
+                    <option value="north_carolina">North Carolina</option>
+                    <option value="michigan">Michigan</option>
+                    <option value="washington">Washington</option>
+                    <option value="mississippi">Mississippi</option>
+                </select>
+            </div>
+
+            <div id="standardsDisplay" class="standards-display">
+                <!-- Standards content will be populated here -->
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Understanding AI: Preparing Students for an AI-Shaped World</p>
         </div>
     </div>
 
-    <div class="section">
-        <h2>Texas Essential Knowledge and Skills (TEKS)</h2>
-        <p><em>Note: While this AI literacy course is cross-disciplinary, these standards reflect the scientific practices and social studies applications most relevant to this lesson.</em></p>
+    <script>
+        const standardsData = {
+            c3: {
+                title: "C3 Framework - College, Career, and Civic Life (National)",
+                sections: {
+                    "Dimension 2 - Economics": [
+                        {
+                            code: "D2.Eco.1.9-12",
+                            text: "Analyze how incentives influence choices that may result in policies with a range of costs and benefits for different groups."
+                        },
+                        {
+                            code: "D2.Eco.14.9-12",
+                            text: "Analyze how technological innovations have affected economic decision-making and behaviors."
+                        }
+                    ],
+                    "Dimension 2 - Civics": [
+                        {
+                            code: "D2.Civ.10.9-12",
+                            text: "Analyze the impact and the appropriate roles of personal interests and perspectives on the application of civic virtues, democratic principles, constitutional rights, and human rights."
+                        },
+                        {
+                            code: "D2.Civ.14.9-12",
+                            text: "Analyze how a society's systems and institutions (e.g., economic, political, legal) affect individuals and groups."
+                        }
+                    ],
+                    "Dimension 3 - Evaluating Sources": [
+                        {
+                            code: "D3.1.9-12",
+                            text: "Gather relevant information from multiple sources representing a wide range of views while using the origin, authority, structure, context, and corroborative value of the sources to guide the selection."
+                        },
+                        {
+                            code: "D3.3.9-12",
+                            text: "Identify evidence that draws information directly and substantively from multiple sources to detect inconsistencies in evidence in order to revise or strengthen claims."
+                        }
+                    ],
+                    "Dimension 4 - Communicating Conclusions": [
+                        {
+                            code: "D4.1.9-12",
+                            text: "Construct arguments using precise and knowledgeable claims, with evidence from multiple sources, while acknowledging counterclaims and evidentiary weaknesses."
+                        },
+                        {
+                            code: "D4.7.9-12",
+                            text: "Assess options for individual and collective action to address local, regional, and global problems by engaging in self-reflection, strategy identification, and complex causal reasoning."
+                        }
+                    ]
+                }
+            },
+            california: {
+                title: "California Education Standards",
+                sections: {
+                    "Social Studies - Principles of American Democracy": [
+                        {
+                            code: "12.1",
+                            text: "Students explain the fundamental principles and moral values of American democracy as expressed in the U.S. Constitution and other essential documents of American democracy."
+                        },
+                        {
+                            code: "12.10",
+                            text: "Students formulate questions about and defend their analyses of tensions within our constitutional democracy and the importance of maintaining a balance between individual rights and the common good."
+                        }
+                    ],
+                    "CTE - Information and Communication Technologies Sector": [
+                        {
+                            code: "ICT 4.1",
+                            text: "Understand artificial intelligence concepts and identify real-world applications of AI systems."
+                        },
+                        {
+                            code: "ICT 4.2",
+                            text: "Analyze ethical implications of artificial intelligence in society."
+                        },
+                        {
+                            code: "ICT 8.1",
+                            text: "Use critical thinking to make informed decisions and solve problems in technology contexts."
+                        },
+                        {
+                            code: "ICT 9.3",
+                            text: "Demonstrate an understanding of emerging technologies and their applications."
+                        }
+                    ],
+                    "History-Social Science Analysis Skills": [
+                        {
+                            code: "Historical Interpretation 3",
+                            text: "Students interpret past events and issues within the context in which an event unfolded rather than solely in terms of present-day norms and values."
+                        },
+                        {
+                            code: "Historical Interpretation 4",
+                            text: "Students understand the meaning, implication, and impact of historical events and recognize that events could have taken other directions."
+                        }
+                    ]
+                }
+            },
+            texas: {
+                title: "Texas Essential Knowledge and Skills (TEKS)",
+                sections: {
+                    "Social Studies - Sociology": [
+                        {
+                            code: "Soc §113.46(c)(1)",
+                            text: "The student understands the theoretical perspectives used to study human social behavior. The student is expected to differentiate types of societies such as agricultural, industrial, and post-industrial."
+                        },
+                        {
+                            code: "Soc §113.46(c)(13)",
+                            text: "The student understands how social institutions affect the lives of individuals in society. The student is expected to analyze the impact of technology on society."
+                        },
+                        {
+                            code: "Soc §113.46(c)(19)",
+                            text: "The student understands the concept of social change. The student is expected to evaluate the effects of major historical events on social change."
+                        }
+                    ],
+                    "CTE - Information Technology": [
+                        {
+                            code: "IT §130.277(c)(1)(E)",
+                            text: "The student demonstrates professional standards/employability skills as required by business and industry. The student is expected to demonstrate knowledge of technology applications and systems."
+                        },
+                        {
+                            code: "IT §130.277(c)(6)(A)",
+                            text: "The student analyzes the impact of emerging technologies. The student is expected to evaluate the impact of artificial intelligence on society."
+                        },
+                        {
+                            code: "IT §130.277(c)(6)(C)",
+                            text: "The student is expected to analyze ethical and legal issues related to the use of information technology."
+                        }
+                    ],
+                    "Social Studies Skills": [
+                        {
+                            code: "§113.46(c)(20)(A)",
+                            text: "The student applies critical-thinking skills to organize and use information acquired through established research methodologies. The student is expected to analyze information by sequencing, categorizing, identifying cause-and-effect relationships, comparing, contrasting, finding the main idea, summarizing, making generalizations and predictions, and drawing inferences and conclusions."
+                        }
+                    ]
+                }
+            },
+            florida: {
+                title: "Florida Standards",
+                sections: {
+                    "Social Studies - Sociology": [
+                        {
+                            code: "SS.912.S.1.2",
+                            text: "Explain the significance of social institutions in society (e.g., economic, political, legal, kinship, and religious institutions)."
+                        },
+                        {
+                            code: "SS.912.S.4.7",
+                            text: "Discuss the impact of social change on individuals and society."
+                        },
+                        {
+                            code: "SS.912.S.8.7",
+                            text: "Evaluate the impact of recent technological innovations on social change."
+                        }
+                    ],
+                    "CTE - Information Technology": [
+                        {
+                            code: "IT-ITS 1.0",
+                            text: "Demonstrate an understanding of the nature and scope of the Information Technology industry."
+                        },
+                        {
+                            code: "IT-ITS 5.0",
+                            text: "Describe emerging technologies that affect the field of information technology."
+                        },
+                        {
+                            code: "IT-ITS 7.0",
+                            text: "Demonstrate leadership and teamwork skills needed to accomplish team goals and objectives."
+                        }
+                    ],
+                    "Digital Literacy & Computer Science": [
+                        {
+                            code: "CS.912.CS-CS.1.3",
+                            text: "Describe how artificial intelligence drives many software and physical systems."
+                        },
+                        {
+                            code: "CS.912.IC-SI.1.1",
+                            text: "Explain the impacts of computing on societal issues."
+                        }
+                    ]
+                }
+            },
+            new_york: {
+                title: "New York State Standards",
+                sections: {
+                    "Social Studies Framework - Participation in Government": [
+                        {
+                            code: "12.G4a",
+                            text: "Civic engagement includes working individually or collectively to address issues and problems confronting society."
+                        },
+                        {
+                            code: "12.G5a",
+                            text: "Important activities of engaged citizens include staying informed about issues and voting."
+                        }
+                    ],
+                    "Social Studies Practices": [
+                        {
+                            code: "A. Gathering, Using, and Interpreting Evidence",
+                            text: "Students identify, describe, and evaluate evidence about events from diverse sources (including written documents, maps, images, etc.)."
+                        },
+                        {
+                            code: "B. Chronological Reasoning",
+                            text: "Students identify causes and effects of events and developments over time."
+                        },
+                        {
+                            code: "E. Economics and Economic Systems",
+                            text: "Students analyze how technological innovations have affected economic decision-making."
+                        }
+                    ],
+                    "Computer Science & Digital Fluency": [
+                        {
+                            code: "9-12.IC.5",
+                            text: "Describe ways that complex computer systems can be designed for inclusivity and to mitigate unintended consequences."
+                        },
+                        {
+                            code: "9-12.IC.7",
+                            text: "Investigate the use of computer science in multiple fields."
+                        }
+                    ]
+                }
+            },
+            pennsylvania: {
+                title: "Pennsylvania Academic Standards",
+                sections: {
+                    "Civics and Government": [
+                        {
+                            code: "5.1.12.A",
+                            text: "Evaluate the major arguments in support of the system of limited government."
+                        },
+                        {
+                            code: "5.3.12.B",
+                            text: "Examine how power and responsibility are distributed, shared and limited in the government of the United States."
+                        }
+                    ],
+                    "Economics": [
+                        {
+                            code: "6.1.12.C",
+                            text: "Analyze how decisions are made in the marketplace."
+                        },
+                        {
+                            code: "6.4.12.E",
+                            text: "Explain how changes in technology affect businesses and individuals."
+                        }
+                    ],
+                    "Career Education and Work": [
+                        {
+                            code: "13.1.11.A",
+                            text: "Relate careers to individual interests, abilities, and aptitudes."
+                        },
+                        {
+                            code: "13.3.11.C",
+                            text: "Identify and demonstrate literacy, and computational skills necessary to process employment, business, and technology information."
+                        }
+                    ]
+                }
+            },
+            illinois: {
+                title: "Illinois Learning Standards",
+                sections: {
+                    "Social Science": [
+                        {
+                            code: "SS.IS.4.9-12",
+                            text: "Develop claims using evidence from multiple sources to answer essential questions."
+                        },
+                        {
+                            code: "SS.Inq.3.9-12",
+                            text: "Determine the kinds of sources that will be helpful in answering compelling and supporting questions."
+                        },
+                        {
+                            code: "SS.CV.5.9-12",
+                            text: "Evaluate citizens' individual and collective capacities to address social and political problems."
+                        }
+                    ],
+                    "Computer Science": [
+                        {
+                            code: "9-12.IC.SI.1",
+                            text: "Evaluate the ways computing impacts personal, ethical, social, economic, and cultural practices."
+                        },
+                        {
+                            code: "9-12.IC.C.1",
+                            text: "Evaluate computational artifacts to maximize their beneficial effects and minimize harmful effects on society."
+                        },
+                        {
+                            code: "9-12.IC.SLE.1",
+                            text: "Describe the impact of cybersecurity threats and explain procedures for securing personal and organizational digital information."
+                        }
+                    ],
+                    "Career Development": [
+                        {
+                            code: "CD.2.a",
+                            text: "Develop strategies to make effective decisions throughout one's life."
+                        },
+                        {
+                            code: "CD.3.c",
+                            text: "Investigate how personal interests and skills can be developed to fit career interests."
+                        }
+                    ]
+                }
+            },
+            ohio: {
+                title: "Ohio Learning Standards",
+                sections: {
+                    "Social Studies - Contemporary World Issues": [
+                        {
+                            code: "CWI.1",
+                            text: "The use of primary and secondary sources can help one to analyze contemporary issues and better understand the reasons for them."
+                        },
+                        {
+                            code: "CWI.9",
+                            text: "Technological developments have cultural and economic effects throughout the world."
+                        }
+                    ],
+                    "Social Studies Skills & Methods": [
+                        {
+                            code: "SSM.1",
+                            text: "Historians, geographers, economists, and political scientists conduct research and investigations by developing questions, generating potential sources, gathering relevant information, analyzing multiple perspectives, and drawing conclusions."
+                        },
+                        {
+                            code: "SSM.2",
+                            text: "Historical, geographic, economic, and political information can be presented using appropriate media."
+                        }
+                    ],
+                    "Computer Science": [
+                        {
+                            code: "CS.HS.IC.1",
+                            text: "Evaluate the beneficial and harmful effects computing has had on society."
+                        },
+                        {
+                            code: "CS.HS.IC.2",
+                            text: "Test and refine computational artifacts to reduce bias and equity deficits."
+                        }
+                    ]
+                }
+            },
+            georgia: {
+                title: "Georgia Standards of Excellence",
+                sections: {
+                    "Social Studies - Government/Civics": [
+                        {
+                            code: "SSCG22",
+                            text: "Demonstrate knowledge of the criminal justice system."
+                        },
+                        {
+                            code: "SSCG23",
+                            text: "Demonstrate knowledge of the organization and powers of state and local government described in the Georgia Constitution."
+                        }
+                    ],
+                    "Social Studies - Economics": [
+                        {
+                            code: "SSEF5",
+                            text: "The student will describe the roles of government in a market economy."
+                        },
+                        {
+                            code: "SSEF6",
+                            text: "The student will explain how productivity, economic growth, and future standards of living are influenced by investment in factories, machinery, new technology, and the health, education, and training of people."
+                        }
+                    ],
+                    "Information Technology": [
+                        {
+                            code: "IT-ITS-1",
+                            text: "Students will explore information technology careers, emerging technologies, and pathways."
+                        },
+                        {
+                            code: "IT-WD-5",
+                            text: "Students will evaluate emerging technologies and their impact on society."
+                        }
+                    ]
+                }
+            },
+            north_carolina: {
+                title: "North Carolina Standard Course of Study",
+                sections: {
+                    "Social Studies - Sociology": [
+                        {
+                            code: "SS.SO.1",
+                            text: "Analyze how social structures and institutions affect individual behavior and identity."
+                        },
+                        {
+                            code: "SS.SO.4",
+                            text: "Analyze how social change impacts individuals, institutions, and society."
+                        }
+                    ],
+                    "Social Studies - Civics & Economics": [
+                        {
+                            code: "CE.C&G.1.4",
+                            text: "Analyze the principles and ideals underlying American democracy in terms of how they promote freedom."
+                        },
+                        {
+                            code: "CE.E.1.1",
+                            text: "Analyze how economic choices influence employment opportunities and standards of living."
+                        }
+                    ],
+                    "Computer Science": [
+                        {
+                            code: "CS.IC.9-12.1",
+                            text: "Evaluate the beneficial and harmful effects that computational artifacts and innovations have on society, economy, and culture."
+                        },
+                        {
+                            code: "CS.IC.9-12.2",
+                            text: "Evaluate the impact of equity, access, and influence on the distribution of computing resources in a global society."
+                        }
+                    ]
+                }
+            },
+            michigan: {
+                title: "Michigan Academic Standards",
+                sections: {
+                    "Social Studies - Inquiry": [
+                        {
+                            code: "P1.1",
+                            text: "Deeply explore a range of informed perspectives on an issue or question to develop and refine questions for further investigation."
+                        },
+                        {
+                            code: "P3.1",
+                            text: "Identify evidence that draws information from multiple perspectives and sources in response to compelling and supporting questions."
+                        },
+                        {
+                            code: "P4.2",
+                            text: "Construct arguments using claims and evidence from multiple sources, while acknowledging the strengths and limitations of the arguments."
+                        }
+                    ],
+                    "Social Studies - Public Discourse": [
+                        {
+                            code: "6.P4.1",
+                            text: "Engage in discussions that advocate for a position while recognizing and applying the perspectives of others."
+                        },
+                        {
+                            code: "6.P4.2",
+                            text: "Critique arguments related to issues and problems of the discipline with credible evidence."
+                        }
+                    ],
+                    "Computer Science": [
+                        {
+                            code: "HS.IC.SI.1",
+                            text: "Evaluate the ways computing impacts personal, ethical, social, economic, and cultural practices."
+                        },
+                        {
+                            code: "HS.IC.C.1",
+                            text: "Evaluate computational artifacts to maximize their beneficial effects and minimize harmful effects on society."
+                        }
+                    ]
+                }
+            },
+            washington: {
+                title: "Washington State Learning Standards",
+                sections: {
+                    "Social Studies - Civics": [
+                        {
+                            code: "SSS1.9-12.1",
+                            text: "Analyze and evaluate how issues and historical events are shaped by unique circumstances of time and place as well as broader historical contexts."
+                        },
+                        {
+                            code: "SSS5.9-12.2",
+                            text: "Analyze how individuals take action and advocate for change to address issues and problems in communities and systems."
+                        }
+                    ],
+                    "Social Studies - Economics": [
+                        {
+                            code: "SSS2.9-12.2",
+                            text: "Analyze how factors such as economic changes, technological innovations, environmental changes, and government action shape social and economic opportunities."
+                        }
+                    ],
+                    "Computer Science": [
+                        {
+                            code: "9-12.IC.SI.01",
+                            text: "Evaluate computational artifacts with regard to improving their beneficial effects and reducing harmful effects on society."
+                        },
+                        {
+                            code: "9-12.IC.C.01",
+                            text: "Evaluate the ways computing innovations impact culture, society, and individuals."
+                        }
+                    ],
+                    "Career and Technical Education": [
+                        {
+                            code: "CTE.IT.9-12.1",
+                            text: "Demonstrate awareness of emerging technologies and evaluate the potential impact on industries and society."
+                        }
+                    ]
+                }
+            },
+            mississippi: {
+                title: "Mississippi College and Career Readiness Standards",
+                sections: {
+                    "Social Studies - Sociology": [
+                        {
+                            code: "SOC.1",
+                            text: "Understand the theoretical perspectives, methods, and topics studied in sociology, including the impact of social institutions on individuals and society."
+                        },
+                        {
+                            code: "SOC.3",
+                            text: "Analyze the impact of social change, including technological innovations, on individuals, groups, and institutions."
+                        },
+                        {
+                            code: "SOC.7",
+                            text: "Examine how technology affects social interactions, cultural norms, and institutional structures."
+                        }
+                    ],
+                    "Social Studies - Government": [
+                        {
+                            code: "GOV.10",
+                            text: "Evaluate the role of citizens in democratic processes and civic engagement, including participation in policy discussions affecting society."
+                        },
+                        {
+                            code: "GOV.13",
+                            text: "Analyze contemporary policy issues and their impact on individuals and communities."
+                        }
+                    ],
+                    "Career and Technical Education - Information Technology": [
+                        {
+                            code: "IT.1.1",
+                            text: "Demonstrate knowledge of information technology industry, emerging technologies, and career pathways."
+                        },
+                        {
+                            code: "IT.3.2",
+                            text: "Analyze ethical and legal issues related to the use of information and technology in society."
+                        },
+                        {
+                            code: "IT.4.1",
+                            text: "Evaluate the impact of emerging technologies on businesses, industries, and society."
+                        }
+                    ],
+                    "Inquiry and Critical Thinking": [
+                        {
+                            code: "CCR.Reading.9-12.1",
+                            text: "Cite strong and thorough textual evidence to support analysis of what the text says explicitly as well as inferences drawn from the text."
+                        },
+                        {
+                            code: "CCR.Reading.9-12.7",
+                            text: "Integrate and evaluate multiple sources of information presented in different media or formats as well as in words in order to address a question or solve a problem."
+                        },
+                        {
+                            code: "CCR.Writing.9-12.1",
+                            text: "Write arguments to support claims in an analysis of substantive topics or texts, using valid reasoning and relevant and sufficient evidence."
+                        }
+                    ]
+                }
+            }
+        };
 
-        <div class="category-header">
-            Scientific Investigation and Reasoning Skills
-        </div>
+        document.getElementById('stateSelector').addEventListener('change', function() {
+            const selectedState = this.value;
+            const displayDiv = document.getElementById('standardsDisplay');
+            
+            if (selectedState && standardsData[selectedState]) {
+                displayStandards(selectedState);
+                displayDiv.style.display = 'block';
+            } else {
+                displayDiv.style.display = 'none';
+            }
+        });
 
-        <div class="standard-box">
-            <span class="standard-code">§112.34(c)(1)(A)</span>
-            <div class="standard-text">
-                Students demonstrate safe practices during laboratory and field investigations.
-            </div>
-            <div class="alignment-explanation">
-                <strong>Lesson 1.4 Alignment:</strong> Students learn safe, responsible practices for working with AI tools, including understanding when and how to verify AI-generated information. The lesson establishes boundaries for appropriate AI use, analogous to safety protocols in traditional laboratory work.
-            </div>
-        </div>
-
-        <div class="standard-box">
-            <span class="standard-code">§112.34(c)(1)(B)</span>
-            <div class="standard-text">
-                Students know the definition of science and understand that it has limitations, as well as use models to represent the natural world.
-            </div>
-            <div class="alignment-explanation">
-                <strong>Lesson 1.4 Alignment:</strong> Students explicitly examine AI limitations (hallucination, pattern-matching boundaries) and develop conceptual models distinguishing AI pattern-matching from traditional rule-following systems. The calculator paradox introduces understanding that different tools have different capabilities and limitations.
-            </div>
-        </div>
-
-        <div class="standard-box">
-            <span class="standard-code">§112.34(c)(2)(A)</span>
-            <div class="standard-text">
-                Students plan and implement comparative and descriptive investigations by making observations, asking well-defined questions, and using appropriate equipment and technology.
-            </div>
-            <div class="alignment-explanation">
-                <strong>Lesson 1.4 Alignment:</strong> Students develop testable questions about AI boundaries (exit ticket) and plan investigations for Lesson 1.5. The lesson teaches students to ask well-defined questions about computational, factual, temporal, sensory, and logical boundaries of AI systems.
-            </div>
-        </div>
-
-        <div class="standard-box">
-            <span class="standard-code">§112.34(c)(2)(B)</span>
-            <div class="standard-text">
-                Students design and implement experimental investigations by making observations, asking well-defined questions, formulating testable hypotheses, and using appropriate equipment and technology.
-            </div>
-            <div class="alignment-explanation">
-                <strong>Lesson 1.4 Alignment:</strong> Students formulate testable hypotheses in the exit ticket, predicting AI behavior based on conceptual understanding from the lesson. This directly prepares for experimental investigation in Lesson 1.5.
-            </div>
-        </div>
-
-        <div class="standard-box">
-            <span class="standard-code">§112.34(c)(2)(C)</span>
-            <div class="standard-text">
-                Students collect and organize qualitative and quantitative data and make measurements with accuracy and precision using tools.
-            </div>
-            <div class="alignment-explanation">
-                <strong>Lesson 1.4 Alignment:</strong> Students learn to systematically document AI capabilities and limitations. The preview of Lesson 1.5 documentation process teaches structured data collection about AI behavior (what was tested, what happened, what this reveals).
-            </div>
-        </div>
-
-        <div class="standard-box">
-            <span class="standard-code">§112.34(c)(3)(A)</span>
-            <div class="standard-text">
-                Students analyze, evaluate, and critique scientific explanations by using empirical evidence, logical reasoning, and experimental and observational testing.
-            </div>
-            <div class="alignment-explanation">
-                <strong>Lesson 1.4 Alignment:</strong> Students analyze why AI hallucinates using logical reasoning about pattern-matching systems. The Think-Pair-Share activity requires students to evaluate when AI provides reliable vs. unreliable information based on understanding of how AI works.
-            </div>
-        </div>
-
-        <div class="standard-box">
-            <span class="standard-code">§112.34(c)(3)(B)</span>
-            <div class="standard-text">
-                Students communicate and apply scientific information extracted from various sources such as current events, news reports, published journal articles, and marketing materials.
-            </div>
-            <div class="alignment-explanation">
-                <strong>Lesson 1.4 Alignment:</strong> Students learn to critically evaluate AI-generated information, understanding that plausible-sounding content requires verification. Discussion includes distinguishing high-stakes applications (medical, legal, news) where verification is critical.
-            </div>
-        </div>
-
-        <div class="standard-box">
-            <span class="standard-code">§112.34(c)(3)(C)</span>
-            <div class="standard-text">
-                Students draw inferences based on data related to promotional materials for products and services.
-            </div>
-            <div class="alignment-explanation">
-                <strong>Lesson 1.4 Alignment:</strong> Students learn to critically evaluate AI capabilities, distinguishing marketing claims ("smart AI") from actual functionality (pattern-matching with limitations). The calculator paradox challenges assumptions about "smarter" necessarily meaning "more reliable."
-            </div>
-        </div>
-
-        <div class="category-header">
-            Social Studies - Critical Thinking Skills
-        </div>
-
-        <div class="standard-box">
-            <span class="standard-code">§113.41(c)(29)(A)</span>
-            <div class="standard-text">
-                Students use social studies terminology correctly.
-            </div>
-            <div class="alignment-explanation">
-                <strong>Lesson 1.4 Alignment:</strong> Students develop and use precise terminology: hallucination, verification, pattern-matching, domain knowledge, high-stakes vs. low-stakes applications. These terms are essential for discussing AI's social implications.
-            </div>
-        </div>
-
-        <div class="standard-box">
-            <span class="standard-code">§113.41(c)(29)(B)</span>
-            <div class="standard-text">
-                Students use effective written communication skills, including proper citations and avoiding plagiarism.
-            </div>
-            <div class="alignment-explanation">
-                <strong>Lesson 1.4 Alignment:</strong> Discussion of AI as "impressive first draft" addresses proper use of AI-generated content, verification requirements, and the distinction between AI assistance and outsourcing intellectual work. Students consider when using AI crosses into academic dishonesty.
-            </div>
-        </div>
-
-        <div class="standard-box">
-            <span class="standard-code">§113.41(c)(30)(A)</span>
-            <div class="standard-text">
-                Students use a problem-solving process to identify a problem, gather information, list and consider options, consider advantages and disadvantages, choose and implement a solution, and evaluate the effectiveness of the solution.
-            </div>
-            <div class="alignment-explanation">
-                <strong>Lesson 1.4 Alignment:</strong> Think-Pair-Share activity requires students to evaluate when AI use is appropriate by considering advantages (speed, brainstorming), disadvantages (hallucination, need for verification), and context (high-stakes vs. low-stakes situations).
-            </div>
-        </div>
-
-        <div class="standard-box">
-            <span class="standard-code">§113.41(c)(31)(A)</span>
-            <div class="standard-text">
-                Students analyze information by sequencing, categorizing, identifying cause-and-effect relationships, comparing, contrasting, finding the main idea, summarizing, making generalizations and predictions, and drawing inferences and conclusions.
-            </div>
-            <div class="alignment-explanation">
-                <strong>Lesson 1.4 Alignment:</strong> Students analyze cause-and-effect (why hallucination occurs), compare and contrast (AI vs. calculator, pattern-matching vs. rule-following), categorize (types of boundaries), and make predictions (exit ticket hypotheses about AI behavior).
-            </div>
-        </div>
-    </div>
-
-    <div class="section">
-        <h2>English Language Proficiency Standards (ELPS)</h2>
-        <p>These standards support English Language Learners in developing academic language alongside content understanding.</p>
-
-        <div class="category-header">
-            Cross-Curricular Student Expectations
-        </div>
-
-        <div class="elps-box">
-            <span class="standard-code">§74.4(c)(1)(A)</span>
-            <div class="standard-text">
-                Students use prior knowledge and experiences to understand meanings in English.
-            </div>
-            <div class="alignment-explanation">
-                <strong>Lesson 1.4 Alignment:</strong> Lesson builds on students' direct experience with Alia (Lesson 1.3) and familiar tools (calculators). Calculator paradox activates prior knowledge about different types of tools and their reliability.
-            </div>
-        </div>
-
-        <div class="elps-box">
-            <span class="standard-code">§74.4(c)(1)(B)</span>
-            <div class="standard-text">
-                Students monitor oral and written language production and employ self-corrective techniques or other resources.
-            </div>
-            <div class="alignment-explanation">
-                <strong>Lesson 1.4 Alignment:</strong> Think-Pair-Share structure allows students to develop ideas individually, refine through peer discussion, and self-correct understanding before whole-class sharing. Field journal reflection promotes monitoring of comprehension.
-            </div>
-        </div>
-
-        <div class="elps-box">
-            <span class="standard-code">§74.4(c)(1)(D)</span>
-            <div class="standard-text">
-                Students speak using learning strategies such as requesting assistance, employing non-verbal cues, and using synonyms and circumlocution.
-            </div>
-            <div class="alignment-explanation">
-                <strong>Lesson 1.4 Alignment:</strong> Pair and small group discussions provide safe environment for requesting clarification and trying out language. Students practice explaining complex concepts (hallucination, pattern-matching) using their own words.
-            </div>
-        </div>
-
-        <div class="elps-box">
-            <span class="standard-code">§74.4(c)(1)(E)</span>
-            <div class="standard-text">
-                Students internalize new basic and academic language by using and reusing it in meaningful ways in speaking and writing activities that build concept and language attainment.
-            </div>
-            <div class="alignment-explanation">
-                <strong>Lesson 1.4 Alignment:</strong> Key vocabulary (hallucination, pattern-matching, verification, domain knowledge, boundaries) is introduced, used in discussion, and reinforced through written reflection. Multiple opportunities to use terms meaningfully support internalization.
-            </div>
-        </div>
-
-        <div class="elps-box">
-            <span class="standard-code">§74.4(c)(1)(F)</span>
-            <div class="standard-text">
-                Students use accessible language and learn new and essential language in the process.
-            </div>
-            <div class="alignment-explanation">
-                <strong>Lesson 1.4 Alignment:</strong> Lesson introduces technical concepts through accessible examples (calculator, familiar AI uses) before introducing academic terminology. Concept understanding develops before vocabulary demands.
-            </div>
-        </div>
-
-        <div class="category-header">
-            Learning Strategies
-        </div>
-
-        <div class="elps-box">
-            <span class="standard-code">§74.4(c)(2)(C)</span>
-            <div class="standard-text">
-                Students learn new language structures, expressions, and basic and academic vocabulary heard during classroom instruction and interactions.
-            </div>
-            <div class="alignment-explanation">
-                <strong>Lesson 1.4 Alignment:</strong> Direct instruction introduces new vocabulary in context (hallucination explained through demonstration). Think-Pair-Share allows students to hear peers using new vocabulary, reinforcing learning through natural interaction.
-            </div>
-        </div>
-
-        <div class="elps-box">
-            <span class="standard-code">§74.4(c)(2)(D)</span>
-            <div class="standard-text">
-                Students monitor understanding of spoken language during classroom instruction and interactions and seek clarification as needed.
-            </div>
-            <div class="alignment-explanation">
-                <strong>Lesson 1.4 Alignment:</strong> Pair discussions provide opportunities to seek clarification from peers. Teacher circulation during Think-Pair-Share allows students to request clarification in smaller, less intimidating setting than whole-class.
-            </div>
-        </div>
-
-        <div class="elps-box">
-            <span class="standard-code">§74.4(c)(2)(E)</span>
-            <div class="standard-text">
-                Students use visual, contextual, and linguistic support to enhance and confirm understanding of increasingly complex and elaborated spoken language.
-            </div>
-            <div class="alignment-explanation">
-                <strong>Lesson 1.4 Alignment:</strong> Calculator paradox provides visual support. Hallucination demonstration provides concrete example of abstract concept. Boundary brainstorming categories provide organizational framework for understanding.
-            </div>
-        </div>
-
-        <div class="elps-box">
-            <span class="standard-code">§74.4(c)(2)(I)</span>
-            <div class="standard-text">
-                Students demonstrate listening comprehension of increasingly complex spoken English by following directions, retelling or summarizing spoken messages, responding to questions and requests, collaborating with peers, and taking notes commensurate with content and grade-level needs.
-            </div>
-            <div class="alignment-explanation">
-                <strong>Lesson 1.4 Alignment:</strong> Students follow multi-step Think-Pair-Share structure, respond to discussion prompts, collaborate with teammates to analyze scenarios, and take notes for field journal reflection. Comprehension demonstrated through participation at each phase.
-            </div>
-        </div>
-
-        <div class="category-header">
-            Speaking
-        </div>
-
-        <div class="elps-box">
-            <span class="standard-code">§74.4(c)(3)(B)</span>
-            <div class="standard-text">
-                Students expand and internalize initial English vocabulary by learning and using high-frequency English words necessary for identifying and describing people, places, and objects, by retelling simple stories and basic information represented or supported by pictures, and by learning and using routine language needed for classroom communication.
-            </div>
-            <div class="alignment-explanation">
-                <strong>Lesson 1.4 Alignment:</strong> Students describe AI and calculator capabilities, explain the hallucination concept, and use routine academic language for discussion ("I think...", "because...", "for example..."). Visual supports (calculator image, hallucination demonstration) scaffold language use.
-            </div>
-        </div>
-
-        <div class="elps-box">
-            <span class="standard-code">§74.4(c)(3)(D)</span>
-            <div class="standard-text">
-                Students speak using grade-level content area vocabulary in context to internalize new English words and build academic language proficiency.
-            </div>
-            <div class="alignment-explanation">
-                <strong>Lesson 1.4 Alignment:</strong> Students use content-specific vocabulary (hallucination, pattern-matching, verification, boundaries, domain knowledge) in meaningful context during pair and whole-class discussions. Multiple practice opportunities build proficiency.
-            </div>
-        </div>
-
-        <div class="elps-box">
-            <span class="standard-code">§74.4(c)(3)(E)</span>
-            <div class="standard-text">
-                Students share information in cooperative learning interactions.
-            </div>
-            <div class="alignment-explanation">
-                <strong>Lesson 1.4 Alignment:</strong> Think-Pair-Share structure explicitly designed for cooperative learning. Students share individual thinking, build on peers' ideas, and contribute to whole-class knowledge building.
-            </div>
-        </div>
-
-        <div class="elps-box">
-            <span class="standard-code">§74.4(c)(3)(F)</span>
-            <div class="standard-text">
-                Students ask and give information ranging from using a very limited bank of high-frequency, high-need, concrete vocabulary, including key words and expressions needed for basic communication in academic and social contexts, to using abstract and content-based vocabulary during extended speaking assignments.
-            </div>
-            <div class="alignment-explanation">
-                <strong>Lesson 1.4 Alignment:</strong> Discussion progresses from concrete examples (calculator, specific Alia experiments) to abstract concepts (pattern-matching, verification principle). Exit ticket requires extended explanation using academic vocabulary.
-            </div>
-        </div>
-
-        <div class="elps-box">
-            <span class="standard-code">§74.4(c)(3)(G)</span>
-            <div class="standard-text">
-                Students express opinions, ideas, and feelings ranging from communicating single words and short phrases to participating in extended discussions on a variety of social and grade-appropriate academic topics.
-            </div>
-            <div class="alignment-explanation">
-                <strong>Lesson 1.4 Alignment:</strong> Think-Pair-Share explicitly asks students to express opinions about appropriate AI use. Extended discussions explore ideas about high-stakes vs. low-stakes applications, requiring sustained academic discourse.
-            </div>
-        </div>
-
-        <div class="elps-box">
-            <span class="standard-code">§74.4(c)(3)(H)</span>
-            <div class="standard-text">
-                Students narrate, describe, and explain with increasing specificity and detail as more English is acquired.
-            </div>
-            <div class="alignment-explanation">
-                <strong>Lesson 1.4 Alignment:</strong> Students explain complex concepts (why hallucination occurs, difference between AI and calculators) with increasing specificity. Field journal reflection requires detailed explanation with specific examples.
-            </div>
-        </div>
-
-        <div class="category-header">
-            Reading
-        </div>
-
-        <div class="elps-box">
-            <span class="standard-code">§74.4(c)(4)(C)</span>
-            <div class="standard-text">
-                Students develop basic sight vocabulary, derive meaning of environmental print, and comprehend English vocabulary and language structures used routinely in written classroom materials.
-            </div>
-            <div class="alignment-explanation">
-                <strong>Lesson 1.4 Alignment:</strong> Lesson materials use clear headings, visual organization, and repeated key vocabulary to support reading comprehension. Academic vocabulary is introduced with context and examples.
-            </div>
-        </div>
-
-        <div class="elps-box">
-            <span class="standard-code">§74.4(c)(4)(F)</span>
-            <div class="standard-text">
-                Students use visual and contextual support and support from peers and teachers to read grade-appropriate content area text, enhance and confirm understanding, and develop vocabulary, grasp of language structures, and background knowledge needed to comprehend increasingly challenging language.
-            </div>
-            <div class="alignment-explanation">
-                <strong>Lesson 1.4 Alignment:</strong> Visual supports (calculator image, hallucination examples), peer discussion, and teacher guidance support reading of lesson content. Think-Pair-Share provides peer support for comprehension.
-            </div>
-        </div>
-
-        <div class="elps-box">
-            <span class="standard-code">§74.4(c)(4)(G)</span>
-            <div class="standard-text">
-                Students demonstrate comprehension of increasingly complex English by participating in shared reading, retelling or summarizing material, responding to questions, and taking notes commensurate with content area and grade level needs.
-            </div>
-            <div class="alignment-explanation">
-                <strong>Lesson 1.4 Alignment:</strong> Students respond to review questions, summarize understanding in field journal, and demonstrate comprehension through discussion participation. Exit ticket requires synthesizing lesson content into coherent response.
-            </div>
-        </div>
-
-        <div class="category-header">
-            Writing
-        </div>
-
-        <div class="elps-box">
-            <span class="standard-code">§74.4(c)(5)(B)</span>
-            <div class="standard-text">
-                Students write using newly acquired basic vocabulary and content-based grade-level vocabulary.
-            </div>
-            <div class="alignment-explanation">
-                <strong>Lesson 1.4 Alignment:</strong> Field journal reflection and exit ticket require students to write using lesson vocabulary (hallucination, verification, pattern-matching, boundaries). Sentence frames can support ELLs in using new vocabulary correctly.
-            </div>
-        </div>
-
-        <div class="elps-box">
-            <span class="standard-code">§74.4(c)(5)(F)</span>
-            <div class="standard-text">
-                Students write using a variety of grade-appropriate sentence lengths, patterns, and connecting words to combine phrases, clauses, and sentences in increasingly accurate ways as more English is acquired.
-            </div>
-            <div class="alignment-explanation">
-                <strong>Lesson 1.4 Alignment:</strong> Field journal prompts encourage extended writing using causal language ("because," "therefore"), comparative structures ("whereas," "in contrast"), and examples ("for instance," "such as"). Multiple writing opportunities support development.
-            </div>
-        </div>
-
-        <div class="elps-box">
-            <span class="standard-code">§74.4(c)(5)(G)</span>
-            <div class="standard-text">
-                Students narrate, describe, and explain with increasing specificity and detail to fulfill content area writing needs as more English is acquired.
-            </div>
-            <div class="alignment-explanation">
-                <strong>Lesson 1.4 Alignment:</strong> Field journal requires detailed explanation of AI concepts, comparison of appropriate and inappropriate uses, and specific examples from student experience. Exit ticket requires explaining reasoning behind predictions.
-            </div>
-        </div>
-    </div>
-
-    <div class="section">
-        <h2>Standards Alignment by Lesson Activity</h2>
-        <p>This table shows how specific lesson activities address particular standards:</p>
-
-        <table>
-            <tr>
-                <th>Lesson Activity</th>
-                <th>Primary TEKS</th>
-                <th>Primary ELPS</th>
-                <th>Skills Developed</th>
-            </tr>
-            <tr>
-                <td><strong>Opening Hook: Calculator Paradox</strong></td>
-                <td>§112.34(c)(1)(B)<br>§112.34(c)(3)(C)</td>
-                <td>§74.4(c)(1)(A)<br>§74.4(c)(2)(E)</td>
-                <td>Activating prior knowledge, critical evaluation of tools, questioning assumptions</td>
-            </tr>
-            <tr>
-                <td><strong>AI Hallucination Introduction</strong></td>
-                <td>§112.34(c)(1)(B)<br>§112.34(c)(3)(A)<br>§113.41(c)(29)(A)</td>
-                <td>§74.4(c)(1)(E)<br>§74.4(c)(2)(C)<br>§74.4(c)(2)(E)</td>
-                <td>Understanding AI limitations, academic vocabulary development, conceptual model building</td>
-            </tr>
-            <tr>
-                <td><strong>Hallucination Demonstration</strong></td>
-                <td>§112.34(c)(3)(A)<br>§112.34(c)(3)(B)</td>
-                <td>§74.4(c)(2)(E)<br>§74.4(c)(2)(I)</td>
-                <td>Empirical observation, critical analysis, evidence-based reasoning</td>
-            </tr>
-            <tr>
-                <td><strong>Think Phase (Individual)</strong></td>
-                <td>§112.34(c)(3)(A)<br>§113.41(c)(30)(A)<br>§113.41(c)(31)(A)</td>
-                <td>§74.4(c)(1)(B)<br>§74.4(c)(4)(G)</td>
-                <td>Independent critical thinking, analysis, problem-solving, monitoring comprehension</td>
-            </tr>
-            <tr>
-                <td><strong>Pair Phase (Discussion)</strong></td>
-                <td>§112.34(c)(3)(A)<br>§113.41(c)(29)(B)<br>§113.41(c)(31)(A)</td>
-                <td>§74.4(c)(1)(D)<br>§74.4(c)(2)(D)<br>§74.4(c)(3)(E)<br>§74.4(c)(3)(G)</td>
-                <td>Collaborative learning, verbal communication, clarification seeking, peer support</td>
-            </tr>
-            <tr>
-                <td><strong>Share Phase (Whole Class)</strong></td>
-                <td>§112.34(c)(3)(B)<br>§113.41(c)(29)(A)</td>
-                <td>§74.4(c)(3)(F)<br>§74.4(c)(3)(G)<br>§74.4(c)(3)(H)</td>
-                <td>Public speaking, academic discourse, synthesizing ideas, defending positions</td>
-            </tr>
-            <tr>
-                <td><strong>Boundary Brainstorming</strong></td>
-                <td>§112.34(c)(2)(A)<br>§112.34(c)(2)(B)<br>§113.41(c)(31)(A)</td>
-                <td>§74.4(c)(3)(D)<br>§74.4(c)(3)(F)</td>
-                <td>Experimental design, hypothesis formation, categorization, questioning</td>
-            </tr>
-            <tr>
-                <td><strong>Exit Ticket</strong></td>
-                <td>§112.34(c)(2)(B)<br>§113.41(c)(29)(B)</td>
-                <td>§74.4(c)(5)(B)<br>§74.4(c)(5)(G)</td>
-                <td>Hypothesis generation, predictive reasoning, written communication, application of concepts</td>
-            </tr>
-            <tr>
-                <td><strong>Field Journal Reflection</strong></td>
-                <td>§112.34(c)(3)(A)<br>§113.41(c)(29)(B)<br>§113.41(c)(31)(A)</td>
-                <td>§74.4(c)(4)(G)<br>§74.4(c)(5)(F)<br>§74.4(c)(5)(G)</td>
-                <td>Metacognition, synthesis, extended writing, self-assessment, explanatory writing</td>
-            </tr>
-            <tr>
-                <td><strong>Review Questions</strong></td>
-                <td>§112.34(c)(3)(A)<br>§113.41(c)(31)(A)</td>
-                <td>§74.4(c)(4)(G)<br>§74.4(c)(5)(B)</td>
-                <td>Comprehension check, vocabulary reinforcement, concept application</td>
-            </tr>
-        </table>
-    </div>
-
-    <div class="section">
-        <h2>Assessment & Standards Documentation</h2>
-        
-        <h3>Evidence of Standards Mastery</h3>
-        <p>Teachers can document standards mastery through multiple artifacts:</p>
-
-        <table>
-            <tr>
-                <th>Assessment Type</th>
-                <th>Standards Evidenced</th>
-                <th>What to Look For</th>
-            </tr>
-            <tr>
-                <td><strong>Think-Pair-Share Observation</strong></td>
-                <td>TEKS: §112.34(c)(3)(A)<br>ELPS: §74.4(c)(3)(E), (G)</td>
-                <td>Quality of reasoning, use of evidence, peer collaboration, academic discourse</td>
-            </tr>
-            <tr>
-                <td><strong>Exit Ticket</strong></td>
-                <td>TEKS: §112.34(c)(2)(B)<br>ELPS: §74.4(c)(5)(G)</td>
-                <td>Testable hypothesis, clear prediction with reasoning, application of lesson concepts</td>
-            </tr>
-            <tr>
-                <td><strong>Field Journal</strong></td>
-                <td>TEKS: §112.34(c)(3)(A), §113.41(c)(31)(A)<br>ELPS: §74.4(c)(5)(F), (G)</td>
-                <td>Depth of analysis, specific examples, synthesis of ideas, proper vocabulary use</td>
-            </tr>
-            <tr>
-                <td><strong>Review Questions</strong></td>
-                <td>TEKS: §112.34(c)(1)(B), §112.34(c)(3)(A)<br>ELPS: §74.4(c)(4)(G)</td>
-                <td>Accurate understanding of AI limitations, ability to apply concepts to scenarios</td>
-            </tr>
-            <tr>
-                <td><strong>Boundary Ideas</strong></td>
-                <td>TEKS: §112.34(c)(2)(A)<br>ELPS: §74.4(c)(3)(D)</td>
-                <td>Scientific thinking, testable questions, appropriate categorization</td>
-            </tr>
-        </table>
-
-        <h3>Differentiated Standards Support</h3>
-        <p>Modifications for diverse learners maintain standards alignment:</p>
-
-        <ul>
-            <li><strong>Struggling Students:</strong> Sentence frames and word banks support ELPS §74.4(c)(5)(B) and (F) while maintaining grade-level content standards</li>
-            <li><strong>Advanced Students:</strong> Extension questions deepen engagement with TEKS §112.34(c)(3)(A) and §113.41(c)(31)(A) through more complex analysis</li>
-            <li><strong>English Language Learners:</strong> Visual supports and peer discussion scaffolds support all ELPS standards while ensuring access to grade-level TEKS</li>
-        </ul>
-    </div>
-
-    <div class="section">
-        <h2>Cross-Curricular Connections</h2>
-        
-        <p>While Lesson 1.4 primarily addresses scientific investigation and social studies critical thinking standards, it also connects to:</p>
-
-        <h3>English Language Arts & Reading</h3>
-        <ul>
-            <li><strong>Reading comprehension:</strong> Understanding complex text about AI systems</li>
-            <li><strong>Discussion and collaboration:</strong> Think-Pair-Share structure</li>
-            <li><strong>Writing to explain:</strong> Field journal and exit ticket</li>
-            <li><strong>Critical evaluation of sources:</strong> Verification principle</li>
-        </ul>
-
-        <h3>Mathematics</h3>
-        <ul>
-            <li><strong>Computational thinking:</strong> Understanding algorithms vs. pattern-matching</li>
-            <li><strong>Problem-solving:</strong> Developing testable hypotheses</li>
-            <li><strong>Mathematical reasoning:</strong> Recognizing why calculators are reliable for computation</li>
-        </ul>
-
-        <h3>Technology Applications</h3>
-        <ul>
-            <li><strong>Digital citizenship:</strong> Responsible AI use and verification</li>
-            <li><strong>Critical thinking with technology:</strong> Evaluating tool capabilities and limitations</li>
-            <li><strong>Effective communication:</strong> Using technology appropriately for different purposes</li>
-        </ul>
-    </div>
-
-    <div class="section">
-        <h2>Notes for Documentation & Reporting</h2>
-        
-        <div class="lesson-connection">
-            <h3>For Lesson Planning Documentation</h3>
-            <p>When documenting this lesson for administrative review or curriculum mapping:</p>
-            <ul>
-                <li><strong>Primary Standards Focus:</strong> Scientific investigation (TEKS §112.34(c)(2)(A), (B)), critical analysis (TEKS §112.34(c)(3)(A)), and collaborative communication (ELPS §74.4(c)(3)(E), (G))</li>
-                <li><strong>Assessment Evidence:</strong> Exit tickets, field journals, and discussion observation notes</li>
-                <li><strong>Differentiation:</strong> Support structures for ELPS while maintaining grade-level content standards</li>
-                <li><strong>21st Century Skills:</strong> Critical thinking, collaboration, communication, digital literacy</li>
-            </ul>
-        </div>
-
-        <div class="lesson-connection">
-            <h3>For Student Progress Reports</h3>
-            <p>This lesson provides evidence for reporting on:</p>
-            <ul>
-                <li>Scientific inquiry and investigation skills</li>
-                <li>Critical thinking and analysis</li>
-                <li>Collaborative learning and academic discourse</li>
-                <li>Technology literacy and digital citizenship</li>
-                <li>Written and verbal communication</li>
-            </ul>
-        </div>
-    </div>
-
+        function displayStandards(state) {
+            const data = standardsData[state];
+            const displayDiv = document.getElementById('standardsDisplay');
+            
+            let html = `
+                <div class="standards-header">
+                    <h2>${data.title}</h2>
+                    <p>Standards addressed by Understanding AI course</p>
+                </div>
+            `;
+            
+            for (const [sectionName, standards] of Object.entries(data.sections)) {
+                html += `
+                    <div class="standards-section">
+                        <h3>${sectionName}</h3>
+                `;
+                
+                standards.forEach(standard => {
+                    html += `
+                        <div class="standard-item">
+                            <div class="standard-code">${standard.code}</div>
+                            <div class="standard-text">${standard.text}</div>
+                        </div>
+                    `;
+                });
+                
+                html += `</div>`;
+            }
+            
+            displayDiv.innerHTML = html;
+        }
+    </script>
 </body>
 </html>
